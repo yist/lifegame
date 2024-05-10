@@ -5,6 +5,25 @@ def print_board(total_number_rows, total_num_cols):
         print('')
 
 
+def count_cells(sr, sc):
+     for (sr, sc) in [(r-1, c-1), (r-1, c), (r-1, c+1), (r, c-1), (r, c+1), (r+1, c-1), (r+1, c), (r+1, c+1)]:
+            if (sr >= 0 and sc >= 0) and (sr < 10 and sc < 10):
+                if board[sr][sc] == 1:
+                        num_live_cells_counter = num_live_cells_counter + 1
+
+def game_rules(r, c):
+      if board[r][c] == 1:
+            if num_live_cells_counter > 3 or num_live_cells_counter < 2:
+                    board[r][c] = 0
+            if num_live_cells_counter == 2 or num_live_cells_counter == 3:
+                    board[r][c] = 1
+            if board[r][c] == 0:
+                if num_live_cells_counter == 3:
+                    board[r][c] = 1                 
+            print_board(rows, cols)
+
+    
+
 if __name__ == '__main__':
     print('this is life game')
     rows, cols = (10, 10)
@@ -54,14 +73,12 @@ if __name__ == '__main__':
                     pass # Do nothing.
             '''
 
-            
             for (sr, sc) in [(r-1, c-1), (r-1, c), (r-1, c+1), (r, c-1), (r, c+1), (r+1, c-1), (r+1, c), (r+1, c+1)]:
-                if (sr >= 0 and sc >= 0):
+                if (sr >= 0 and sc >= 0) and (sr < 10 and sc < 10):
                     if board[sr][sc] == 1:
                         num_live_cells_counter = num_live_cells_counter + 1
                     else:
                         pass # Do nothing.
-
             # Apply life game rules 
             if board[r][c] == 1:
                 if num_live_cells_counter > 3 or num_live_cells_counter < 2:
@@ -71,6 +88,4 @@ if __name__ == '__main__':
             if board[r][c] == 0:
                 if num_live_cells_counter == 3:
                     board[r][c] = 1                 
-
             print_board(rows, cols)
-
